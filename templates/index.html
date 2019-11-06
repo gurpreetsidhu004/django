@@ -1,0 +1,41 @@
+
+{% extends "base.html" %}
+
+{% block title %}Ai Modal{% endblock %}
+
+
+{% block content %}
+<section class="margn-top ai-banner">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="outr-div-d">
+					<div class="card-header">
+						<h1>AI Keras Deep Learning Model</h1>	
+					</div>
+					<div class="card-body ">
+						{% if all_tags %}
+						<h3 style="color:#007fff">Predicted tags from AI model</h3>
+						<div class="jumbotron">
+							{% for tag in all_tags %}
+							<button style="margin: 10px;" class="btn btn-success">{{tag}}</button>
+							{% endfor %}
+						</div>
+						<a href="{% url 'ai_model' %}"><button class="btn btn-primary">Back</button></a>
+						{% else %}
+						<form class="ai-form" method="post">
+						{% csrf_token %}
+							<div class="form-group">
+								<label for="exampleFormControlTextarea1">Enter Text for <b><u>AI</u></b> Prediction </label>
+								<textarea class="form-control"  rows="10"  name='my_text'></textarea>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-success">Upload</button>
+							</div>	
+						</form>
+							{% endif %}	
+					</div>
+				</div>
+			 </div>
+		</div>
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+<header class="menus-sec">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+            <!-- <nav class="navbar navbar-expand-lg navbar-light"> -->
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand logo" href="#"><img src="https://image.freepik.com/free-vector/business-women-gears_24908-56510.jpg" alt="logo" /></a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                    <li><a class="nav-link hw-wrk" href="{% url 'home' %}">Home</a></li>
+                    {%if request.user.is_authenticated %}
+                    <li><a class="nav-link hw-wrk" href="{% url 'upload' %}">NLP Keywords</a></li>
+                    <li><a class="nav-link faq" href="{% url 'ai_model' %}">Ai Model</a></li>
+                    <li> <a class="nav-link why-tb"  href="{% url 'posts' %}">Show Posts</a></li>
+                    <li><a class="nav-link why-tb"  href="{% url 'book_list' %}">Posts</a></li>
+                    <li><a class="nav-link why-tb"  href="{% url 'excel' %}">Import</a></li>
+                    <li><a class="nav-link why-tb"  href="{% url 'logout' %}">Log Out</a></li>
+
+                    {% else %}
+                    <li><a class="nav-link hw-wrk" href="{% url 'signin' %}">Log in</a></li>
+                    <li><a class="nav-link faq" href="{% url 'signup' %}">Sign up</a></li>
+                    {% endif %}
+                  </ul>
+                </div>
+
+            </nav>
+          </div>
+      </div>
+    </div>
+</header>

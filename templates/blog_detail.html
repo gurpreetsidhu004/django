@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %} post details {% endblock %}
+
+{% block content %}
+<section class="margn-top">
+<div class="col-md-12">
+    <h3 class="post-al">File name is :{{ post.title }} <a class="snd-btn" href="{% url 'blog_ghost' post.pk%}"> Send to Ghost </a></h3>
+    <small>
+        {{ post.created_on.date }} |&nbsp;
+        Categories:&nbsp;
+        <a href="{% url 'blog_category' post.categories %}">
+            {{ post.categories }}
+        </a>
+        <!-- {% for category in post.categories.all %}
+        <a href="{% url 'blog_category' category.name %}">
+            {{ category.name }}
+        </a>&nbsp;
+        {% endfor %} -->
+
+    </small>
+
+
+    <p class="file-brk"> File url is {{post.file_path}} </p>
+    <form method="POST" >
+      {% csrf_token %}
+     <div class="row row-not clearfix"  name="content">
+        {% for key, my_url in post.keywords_with_links.items %}
+        <div class="col-md-4 col-not">
+    
+    <!-- <p>{{dict_item}}</p>
+     -->
+          <div class="card m-ftn">
+                <div class="card-body">
+                  <h4 class="card-title">{{key}}</h4>
+                  <div class="post-img">
+                    <img  id="img-{{key}}"  class="card-img-bottom image" src="{{my_url}}" alt="Card image" style="width:100%">
+                  </div>
+                  <br>
+               <button id="btn_{{key}}" type="button" class="btn btn-primary"  onclick="GetSuccess('{{key}}','{{my_url}}',{{post.pk}})"> Refresh image </button>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+
+<!-- <div class="jumbotron">
+<a href="{% url 'blog_ghost' post.pk%}"> Send to Ghost </a>
+
+</div> -->
+
+</form>
+
+<script>
+        function GetSuccess(key, def_url, post_key ){
+          // console.log(key, def_url, post_key)
+          // console.log("btn_"+key)
+          // This function used to disable button using jquerry
+          $("#"+"btn_"+key).attr("disabled", true);
+          $.ajax({
+            url: '{% url "image_search" %}',
+            data: {
+              'key': key,
+              'post_key': post_key,
+              'default_url': def_url
+            },
+            dataType: 'json',
+            success: function (data) {
+              console.log(data)
+            // console.log(data.img_url[0])
+            $('#'+data.img_key).attr('src',data.img_url[0])
+            $("#"+"btn_"+key).attr("disabled", false);
+            // $()
+            }
+            });
+
+        }
+
+</script>
+
+    <!-- <p>{{ post.body | linebreaks }}</p>-->
+</div>
+</section>
+<footer>
+    <p>{% include "footer.html" %}</p>
+</footer>
+{% endblock %}

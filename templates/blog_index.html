@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %} All posts {% endblock %}
+{% block content %}
+<section class="margn-top new-posts">
+    <div class="col-md-12">
+        <h1 class="post-al">All posts</h1>
+        <hr style="height: 10px; background-color: #1e1466">
+        {% if no_data %}
+        <div class="jumbotron">
+            <h1 style="text-align: center;"> {{no_data}}</h1>
+        </div>
+        {% else %}
+        <div class="row row-not clearfix">
+
+        {% for post in posts %}
+            <div class="col-md-4 col-not">
+                <div class="single_post ">
+                {% if post.feature_image %}
+                <img src="{{post.feature_image}}" >
+                {% endif %}
+                <h2><a href="{% url 'blog_detail' post.pk%}">{{ post.title  | slice:":100" }}</a></h2>
+                <small>
+                    {{ post.created_on.date }} |&nbsp;
+                    Categories:&nbsp;
+
+                    <a href="{% url 'blog_category' post.categories %}">
+                        {{ post.categories }}
+                    </a>
+                    |&nbsp;
+                    Tags:&nbsp;
+                    {% for tag_d in post.complete_tags.all %}
+                    <a href="{% url 'tag_filter_base' tag_d %}">{{tag_d}},</a>
+                    {% endfor %}
+                </small>
+                <div class="file-btn">
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+
+    <div class="my_pagination">
+        {% if posts.has_other_pages %}
+            <ul class="pagination">
+        {% if posts.has_previous %}
+          <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        
+        {% for i in posts.paginator.page_range %}
+          {% if posts.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if posts.has_next %}
+          <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+       <!--  <p>{{ post.body | slice:":400" }}...</p> -->
+        {% endif %}
+    </div>
+</section>
+<footer>
+    <p>{% include "footer.html" %}</p>
+</footer>
+{% endblock %}

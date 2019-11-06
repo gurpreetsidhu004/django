@@ -1,0 +1,30 @@
+{% for book in books %}
+  <tr>
+    <td>{{ book.id }}</td>
+    <td>{{ book.title }}</td>
+    <td>{{ book.mobiledoc }}</td>
+    <td>{{book.categories}}</td>
+    <td>{{ book.feature_image }}</td>
+    <td>{{ book.iframe }}</td>
+    <td>  {% for tag in  book.complete_tags.all %}
+            <span>{{tag.name}}</span>,
+          {% endfor %}
+  </td>
+    <td style="width: 150px">
+      <button type="button"
+              class="btn btn-warning btn-sm js-update-book"
+              data-url="{% url 'book_update' book.id %}">
+        <span class="glyphicon glyphicon-pencil"></span> Edit
+      </button>
+      <button type="button"
+              class="btn btn-danger btn-sm js-delete-book"
+              data-url="{% url 'book_delete' book.id %}">
+        <span class="glyphicon glyphicon-trash"></span> Delete
+      </button>
+    </td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="8" class="text-center bg-warning">No post</td>
+  </tr>
+{% endfor %}

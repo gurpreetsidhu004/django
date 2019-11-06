@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Excel handler{% endblock %}
+
+{% block content %}
+<section class="margn-top">
+<div class="jumbotron max-w">
+    <h3>This is page save post in db from Excel file </h3>
+
+    <h3>please upload only Excel file.</h3>
+
+
+      <form method="post" action=""  enctype="multipart/form-data">
+          {% csrf_token %}
+          <label class="file">
+            <input type="file" id="file" name="myfile" aria-label="File browser example">
+            <span class="file-custom"></span>
+          </label>
+          <br>
+          <div class="syn_btn">
+          <button class="btn btn-primary" type="submit">Upload</button>
+          <button class="btn btn-primary"><a href="{% static 'samples/Video_Tags_Posts.xlsx'%}">Sample</a></button>
+          </div>
+
+      </form>
+        <br>
+        <p style="text-align: justify;">Please check the sample excel file template(by clicking on sample button) before uploading your own file as system can accept only particular template in current development.</p>
+        
+
+
+</div>
+</section>
+<footer>
+    <p>{% include "footer.html" %}</p>
+</footer>
+{% endblock %}

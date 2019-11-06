@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %} Filtered posts {% endblock %}
+{% block content %}
+<section class="margn-top">
+<div class="col-md-8 offset-md-2">
+    <h1 class="post-al">{{ category | title }}</h1>
+    <hr>
+    {% for post in posts %}
+        <div>
+        <h2><a href="{% url 'blog_detail' post.pk%}">{{ post.title }}</a></h2>
+
+        <small>
+            {{ post.created_on.date }} |&nbsp;
+            Categories:&nbsp;
+            {% for category in post.categories.all %}
+            <a href="{% url 'blog_category' category.name %}">
+                {{ category.name }}
+            </a>&nbsp;
+            {% endfor %}
+        </small>
+        <p>{{ post.body | slice:":400" }}...</p>
+        </div>
+    {% endfor %}
+
+</div>
+</section>
+<footer>
+    <p>{% include "footer.html" %}</p>
+</footer>
+{% endblock %}

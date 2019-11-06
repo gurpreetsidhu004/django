@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Post edit {% endblock %}
+
+{% load static %}
+
+{% block js %}
+<script src="{% static 'books/js/books.js' %}"></script>
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/datatables.min.js"></script>
+    
+    <script>
+    $(document).ready( function () {
+    $('.Datattable123').DataTable({
+    dom: 'B<"clear">lfrtip',
+    buttons: {
+        name: 'primary',
+        buttons: ['csv', 'excel']
+        }}
+        );
+    } );
+  function OnClick() {
+  alert("Thankyou your request is processed ");
+  }
+    </script>
+{% endblock %}
+{% block content %}
+<section class="margn-top">
+  <h1 class="page-header p-t">Posts</h1>
+  <div class="button_div"> 
+    <button type="button" class="btn btn-primary js-create-book" data-url="{% url 'book_create' %}">
+      <span class="glyphicon glyphicon-plus"></span>
+      New Post
+    </button>
+    <div class="syn_btn">
+       <button type="button"  onclick="OnClick()"class="btn btn-primary" >
+      <a href="{% url 'testing' %}"> Import tags from Ghost  </a>
+    </button>
+     <button type="button"  onclick="OnClick()"class="btn btn-primary" >
+      <a href="{% url 'all_hit' %}"> excel post to Ghost </a>
+    </button>
+    </div>
+  </div>
+  <table class="table Datattable123" id="book-table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Title</th>
+        <th>Mobiledoc</th>
+        <th>Category</th>
+        <th>Feature image</th>
+        <th>Iframe</th>
+        <th>Complete tags</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include 'books/includes/partial_book_list.html' %}
+    </tbody>
+  </table>
+  <div class="modal fade" id="modal-book">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+    <p>{% include "footer.html" %}</p>
+</footer>
+{% endblock %}
+

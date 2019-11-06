@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends 'base.html'%}
+{% block content %}
+{% load staticfiles %}
+{% load bootstrap4 %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Sign Up Form</title>    <!-- <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css"%}"/> -->
+    <style type="text/css">
+      .col-md-10.bg-light.mx-auto.my-auto {
+    margin-left: 10%;
+    margin-top: 8%;
+    background-color: #e8e5e6;
+    padding: 3%;
+
+}
+    </style>
+  </head>
+  <body >
+    <div class="container-fluid p-2 mt-5 ">
+      <div class="row my-2 mx-2 p-5">
+        <div class="col-md-10 bg-light mx-auto my-auto" style="border-radius:19px;">
+          <br>
+          <h1 class="jumbotron" style="text-shadow:1px 10px 17px black;text-align:center">Sign Up here</h1>
+
+          <form method="post" class="ml-3"  enctype='multipart/form-data'>
+            <br>
+            {% bootstrap_form form %}
+
+            {% csrf_token %}  
+            <br>
+            <input type="submit" name="" onclick="OnClick()" style="margin-top:25px;margin-bottom:15px;border-radius:20px"class="btn btn-success btn-block p-2 m-1  "value="Sign Up">
+            <script>
+  function OnClick() {
+  alert("Thank you for registering");
+  }
+  </script>
+
+          </form>
+
+          <br>
+
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+  {% endblock %}
+</html>
