@@ -1,6 +1,6 @@
 import nltk
 from nltk.chunk.regexp import *
-from nlp import tokenizer as tk
+from .nlp import tokenizer as tk
 
 
 KP_REGEX_1 = "<JJ|NN|NNP|NNS|NNPS>*<NN|NNP|NNS|NNPS|VB|VBG>"

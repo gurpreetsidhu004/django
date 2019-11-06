@@ -30,7 +30,7 @@ import numpy as np
 import pandas as pd
 import nltk, pickle
 from keras.preprocessing.sequence import pad_sequences
-from utils import postprocessing
+from .utils import postprocessing
 
 import textract as textract
 import PyPDF2

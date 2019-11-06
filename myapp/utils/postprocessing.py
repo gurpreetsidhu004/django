@@ -1,6 +1,6 @@
 import itertools
 import numpy as np
-from nlp import chunker, cleaner
+from ..nlp import chunker, cleaner
 
 
 def undo_sequential(output):

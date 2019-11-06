@@ -1,7 +1,7 @@
 from keras.preprocessing.sequence import pad_sequences
 from keras.utils import np_utils
 from utils import glove
-from nlp import dictionary as dict
+from ..nlp import dictionary as dict
 import logging
 import numpy as np
 import random
