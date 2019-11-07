@@ -105,8 +105,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'nlpapp',  # Name of database
-        'USER': 'rajat',
-        'PASSWORD': '123',
+        'USER': 'root@localhost',
+        'PASSWORD': 'Server@123',
         'HOST': 'localhost', 
         'PORT': '',
     }
